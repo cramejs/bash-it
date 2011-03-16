@@ -1,4 +1,9 @@
 
+SCM_THEME_PROMPT_DIRTY='${green}!'
+SCM_THEME_PROMPT_CLEAN=''
+SCM_THEME_PROMPT_PREFIX=' on ${purple}'
+SCM_THEME_PROMPT_SUFFIX='${reset_color}'
+
 hg_prompt_info() {
     hg prompt --angle-brackets "\
 < on ${purple}<branch>${reset_color}>\
@@ -9,7 +14,8 @@ patches: <patches|join( → )|pre_applied(${yellow})|post_applied(${reset_color}
 
 prompt() {
     hg_prompt=$(hg_prompt_info)
-    PS1="\n${purple}\u${reset_color} in ${bold_green}\W${reset_color}${hg_prompt}\n$ "
+    git_prompt=$(git_prompt_info)
+    PS1="\n${purple}\u${reset_color} in ${bold_green}\w${reset_color}${hg_prompt}${git_prompt}\n$ "
 }
 
 PROMPT_COMMAND=prompt
